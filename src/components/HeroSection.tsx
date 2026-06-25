@@ -4,40 +4,7 @@ import { ButtonLink } from '@/components/ui/ButtonLink'
 import { Reveal } from '@/components/ui/Reveal'
 import { LogoMark } from '@/components/ui/Logo'
 import { NajdiPattern } from '@/components/ui/NajdiPattern'
-import { Icon } from '@/components/ui/Icon'
-import type { FloatingCard } from '@/data/siteContent'
 import { hero } from '@/data/siteContent'
-import { cn } from '@/lib/cn'
-
-/** A single glassy floating service chip. */
-function HeroCard({ card, className }: { card: FloatingCard; className?: string }) {
-  return (
-    <div
-      className={cn(
-        'flex items-center gap-3 rounded-2xl border border-sand-50/15 bg-charcoal-900/50 px-4 py-3 shadow-card ring-warm backdrop-blur-md',
-        className,
-      )}
-    >
-      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-red/15 text-brand-gold-light">
-        <Icon name={card.icon} className="h-5 w-5" />
-      </span>
-      <span className="flex flex-col leading-tight">
-        <span className="text-sm font-bold text-sand-50">{card.titleAr}</span>
-        <span className="text-[0.65rem] uppercase tracking-[0.15em] text-sand-200/60">
-          {card.titleEn}
-        </span>
-      </span>
-    </div>
-  )
-}
-
-// Floating card placement around the centered content (lg+ only)
-const cornerPlacement = [
-  'left-[5%] top-[19%]',
-  'right-[5%] top-[15%]',
-  'left-[7%] bottom-[23%]',
-  'right-[6%] bottom-[19%]',
-]
 
 export function HeroSection() {
   const spotlightRef = useRef<HTMLDivElement>(null)
@@ -84,21 +51,11 @@ export function HeroSection() {
       <div className="relative z-10 flex flex-1 items-center justify-center">
         {/* concentric orbit backdrop */}
         <div className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:block">
-          <div className="h-[34rem] w-[34rem] rounded-full border border-sand-50/[0.06]" />
+          <div className="h-[36rem] w-[36rem] rounded-full border border-sand-50/[0.06]" />
           <div className="absolute inset-[14%] rounded-full border border-sand-50/[0.05]" />
           <div className="absolute inset-[30%] rounded-full border border-brand-gold/[0.08]" />
+          <div className="absolute inset-[46%] rounded-full border border-sand-50/[0.04]" />
         </div>
-
-        {/* floating service cards in the corners (lg+) */}
-        {hero.floatingCards.map((card, i) => (
-          <div
-            key={card.titleEn}
-            className={cn('absolute hidden w-52 animate-float lg:block', cornerPlacement[i])}
-            style={{ animationDelay: `${i * 0.7}s`, animationDuration: `${6 + i}s` }}
-          >
-            <HeroCard card={card} />
-          </div>
-        ))}
 
         <div className="container-wahj flex flex-col items-center gap-7 py-24 text-center">
           <Reveal>
@@ -146,15 +103,6 @@ export function HeroSection() {
               </ButtonLink>
             </div>
           </Reveal>
-
-          {/* service cards — grid on mobile/tablet */}
-          <div className="mt-3 grid w-full max-w-xl grid-cols-1 gap-3 sm:grid-cols-2 lg:hidden">
-            {hero.floatingCards.map((card, i) => (
-              <Reveal key={card.titleEn} delay={i * 70}>
-                <HeroCard card={card} />
-              </Reveal>
-            ))}
-          </div>
         </div>
 
         {/* scroll cue */}

@@ -38,8 +38,7 @@ export function IntroLoader() {
   if (phase === 'done') return null
 
   const out = phase === 'out'
-  const nameAr = brand.nameAr.split(' ')[0] // "وهج" (without the slug)
-  const nameEn = brand.nameEn.split(' ')[0] // "Wahj" → WAHJ
+  const nameAr = brand.nameAr.split(' ')[0] // "وهج" — matches the hero emblem
 
   return createPortal(
     <div
@@ -86,11 +85,7 @@ export function IntroLoader() {
             </span>
           </div>
 
-          <span className="animate-fade-in text-xs font-medium uppercase tracking-[0.6em] text-brand-gold-light [animation-delay:0.5s] sm:text-sm">
-            {nameEn}
-          </span>
-
-          <span className="mt-2 h-px w-48 origin-center animate-load-bar bg-gradient-to-l from-transparent via-brand-gold to-transparent" />
+          <span className="mt-3 h-px w-48 origin-center animate-load-bar bg-gradient-to-l from-transparent via-brand-gold to-transparent" />
         </div>
       </div>
     </div>,
