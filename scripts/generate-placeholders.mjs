@@ -134,9 +134,10 @@ function sparkMark(cx, cy, r, redA, redB, gold) {
 }
 
 const esc = (str) => str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+const arabicDigits = (v) => String(v).replace(/[0-9]/g, (d) => '٠١٢٣٤٥٦٧٨٩'[Number(d)])
 
 /* ------------------------------ scene ------------------------------------ */
-function buildScene({ name, w, h, theme, layout = 'card', titleAr = '', titleEn = '' }) {
+function buildScene({ name, w, h, theme, layout = 'card', titleAr = '', titleEn = '', clipIndex = 0, clipTotal = 0, projectAr = '' }) {
   const t = THEMES[theme]
   const rand = rng(name)
   const horizon = round(h * 0.7)
@@ -203,6 +204,16 @@ function buildScene({ name, w, h, theme, layout = 'card', titleAr = '', titleEn 
     svg += `<text x="${round(w / 2)}" y="${round(h * 0.86)}" text-anchor="middle" font-family="${fontStack}" font-weight="700" font-size="${titleSize}" fill="#FAF6EE" direction="rtl">${esc(titleAr)}</text>`
     if (titleEn)
       svg += `<text x="${round(w / 2)}" y="${round(h * 0.86 + titleSize * 0.92)}" text-anchor="middle" font-family="${fontStack}" font-weight="500" letter-spacing="${round(enSize * 0.35)}" font-size="${enSize}" fill="${t.glow}">${esc(titleEn.toUpperCase())}</text>`
+  } else if (layout === 'clip') {
+    const clipSize = round(Math.min(w, h) * 0.12)
+    const idxSize = round(clipSize * 0.42)
+    // project label (top)
+    svg += `<text x="${round(w / 2)}" y="${round(h * 0.16)}" text-anchor="middle" font-family="${fontStack}" font-weight="500" letter-spacing="2" font-size="${idxSize}" fill="${t.glow}" direction="rtl" opacity="0.92">${esc(projectAr)}</text>`
+    // "مقطع NN" (bottom)
+    svg += `<g transform="translate(${round(w / 2)}, ${round(h * 0.64)})">${sparkMark(0, 0, round(Math.min(w, h) * 0.05), '#D83A40', '#9C1B20', '#C9A24B')}</g>`
+    svg += `<text x="${round(w / 2)}" y="${round(h * 0.84)}" text-anchor="middle" font-family="${fontStack}" font-weight="700" font-size="${clipSize}" fill="#FAF6EE" direction="rtl">مقطع ${arabicDigits(String(clipIndex).padStart(2, '0'))}</text>`
+    // index NN / TT (corner)
+    svg += `<text x="${round(w * 0.5)}" y="${round(h * 0.93)}" text-anchor="middle" font-family="${fontStack}" font-weight="500" font-size="${round(idxSize * 0.78)}" fill="${t.glow}" direction="rtl">${arabicDigits(String(clipIndex).padStart(2, '0'))} / ${arabicDigits(String(clipTotal).padStart(2, '0'))}</text>`
   }
 
   svg += '</svg>'
@@ -240,4 +251,36 @@ for (const spec of SPECS) {
   writeFileSync(resolve(OUT_DIR, `${spec.name}.svg`), svg, 'utf8')
   count++
 }
-console.log(`✓ Generated ${count} placeholder scenes → public/images/`)
+
+/* ------------------ per-project clip thumbnails (lightbox) --------------- */
+// slug + count must match portfolio.items in src/data/siteContent.ts
+const WORKS = [
+  { slug: 'diriyah', theme: 'night-gold', projectAr: 'الدرعية', count: 6 },
+  { slug: 'poetry', theme: 'maroon', projectAr: 'أمسيات شعرية', count: 4 },
+  { slug: 'culture-guide', theme: 'dark', projectAr: 'دليل الثقافة والفنون', count: 1 },
+  { slug: 'recovery-device', theme: 'warm', projectAr: 'ريلز جهاز استشفاء', count: 3 },
+  { slug: 'hr-greeting', theme: 'green', projectAr: 'معايدة الموارد البشرية', count: 1 },
+  { slug: 'interviews-2020', theme: 'dark', projectAr: 'مقابلات معرض 20/20', count: 9 },
+]
+
+const WORKS_DIR = resolve(OUT_DIR, 'works')
+mkdirSync(WORKS_DIR, { recursive: true })
+let clipCount = 0
+for (const work of WORKS) {
+  for (let i = 1; i <= work.count; i++) {
+    const svg = buildScene({
+      name: `${work.slug}-${i}`,
+      w: 800,
+      h: 600,
+      theme: work.theme,
+      layout: 'clip',
+      clipIndex: i,
+      clipTotal: work.count,
+      projectAr: work.projectAr,
+    })
+    writeFileSync(resolve(WORKS_DIR, `${work.slug}-${i}.svg`), svg, 'utf8')
+    clipCount++
+  }
+}
+
+console.log(`✓ Generated ${count} scenes + ${clipCount} clip thumbnails → public/images/`)

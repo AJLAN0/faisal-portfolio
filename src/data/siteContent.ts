@@ -214,52 +214,74 @@ export const diriyah = {
 /*  Works / Portfolio                                                         */
 /* -------------------------------------------------------------------------- */
 export interface PortfolioItem {
+  /** slug → used to build clip image paths: /images/works/<slug>-<n>.svg */
+  slug: string
   titleAr: string
   titleEn: string
   category: string
+  /** number of videos/clips in this project (drives the lightbox gallery) */
+  videoCount: number
   image: string
 }
 
 export const portfolio = {
   eyebrow: 'أعمال مختارة',
   title: 'أعمال مختارة',
-  subtitle: 'نماذج من تغطياتنا للجهات الثقافية والحكومية والعلامات التجارية.',
-  cardCta: 'عرض التفاصيل',
+  subtitle: 'كل مشروع هو مجموعة من المقاطع — اضغط لاستعراض المجموعة كاملة.',
+  collectionCta: 'استعرض المجموعة',
+  clipWord: 'مقطع',
+  videosWord: 'مقاطع',
+  projectsWord: 'مشاريع',
+  // Stat labels for the summary row under the heading
+  totalsVideosLabel: 'مقطعًا منتَجًا',
+  totalsProjectsLabel: 'مشاريع مختارة',
   items: [
     {
+      slug: 'diriyah',
       titleAr: 'الدرعية',
       titleEn: 'Diriyah',
       category: 'Event Coverage / Cultural Content',
+      videoCount: 6,
       image: '/images/portfolio-diriyah.svg',
     },
     {
+      slug: 'poetry',
       titleAr: 'أمسيات شعرية',
       titleEn: 'Poetry Evenings',
       category: 'Event Coverage / Cultural Documentation',
+      videoCount: 4,
       image: '/images/portfolio-poetry.svg',
     },
     {
+      slug: 'culture-guide',
       titleAr: 'تدشين دليل الثقافة والفنون لوزارة الثقافة',
       titleEn: 'Launch of the Culture & Arts Guide — Ministry of Culture',
       category: 'Government / Cultural Launch Coverage',
+      videoCount: 1,
       image: '/images/portfolio-culture-guide.svg',
     },
     {
+      slug: 'recovery-device',
       titleAr: 'ريلز فيديوهات إعلانية — جهاز استشفاء',
       titleEn: 'Promotional Video Reels — Recovery Device',
       category: 'Product Reels / Promotional Content',
+      videoCount: 3,
       image: '/images/portfolio-recovery-device.svg',
     },
     {
+      slug: 'hr-greeting',
       titleAr: 'معايدة وزارة الموارد البشرية',
       titleEn: 'Ministry of Human Resources Greeting',
       category: 'Government Greeting / Social Content',
+      videoCount: 1,
       image: '/images/portfolio-hr-greeting.svg',
     },
     {
+      slug: 'interviews-2020',
       titleAr: 'مقابلات معرض 20/20',
       titleEn: '20/20 Exhibition Interviews',
       category: 'Interviews / Exhibition Coverage',
+      videoCount: 9,
       image: '/images/portfolio-2020-interviews.svg',
     },
   ] satisfies PortfolioItem[],

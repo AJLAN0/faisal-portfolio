@@ -6,13 +6,21 @@ interface CountUpProps {
   duration?: number
   prefix?: string
   suffix?: string
+  /** format the current number (e.g. Western → Arabic-Indic digits) */
+  format?: (n: number) => string
 }
 
 /**
  * Counts from 0 → value once it scrolls into view.
  * Falls back to the final number instantly when reduced motion is preferred.
  */
-export function CountUp({ value, duration = 1600, prefix = '', suffix = '' }: CountUpProps) {
+export function CountUp({
+  value,
+  duration = 1600,
+  prefix = '',
+  suffix = '',
+  format,
+}: CountUpProps) {
   const { ref, visible } = useReveal<HTMLSpanElement>({ once: true, threshold: 0.4 })
   const [display, setDisplay] = useState(0)
 
@@ -43,7 +51,7 @@ export function CountUp({ value, duration = 1600, prefix = '', suffix = '' }: Co
   return (
     <span ref={ref}>
       {prefix}
-      {display}
+      {format ? format(display) : display}
       {suffix}
     </span>
   )
