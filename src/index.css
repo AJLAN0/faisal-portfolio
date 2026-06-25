@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================================================== */
+/*  Base                                                                      */
+/* ========================================================================== */
+@layer base {
+  :root {
+    color-scheme: light;
+    /* repeating Najdi triangle band, used as a thin decorative divider */
+    --najdi-band: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14' viewBox='0 0 28 14'%3E%3Cpath d='M0 14 L7 0 L14 14 L21 0 L28 14' fill='none' stroke='%23C1272D' stroke-width='1.2' opacity='0.7'/%3E%3C/svg%3E");
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 96px; /* keep anchors clear of the sticky navbar */
+  }
+
+  body {
+    @apply bg-sand-50 font-sans text-charcoal-900 antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden; /* guard against RTL horizontal overflow */
+  }
+
+  ::selection {
+    @apply bg-brand-red text-sand-50;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.brand.red');
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* Custom scrollbar — subtle, warm */
+  ::-webkit-scrollbar {
+    width: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme('colors.sand.100');
+  }
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.sand.400');
+    border: 3px solid theme('colors.sand.100');
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.brand.red');
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ========================================================================== */
+/*  Components                                                                */
+/* ========================================================================== */
+@layer components {
+  .container-wahj {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+
+  .heading-display {
+    @apply font-display font-bold leading-[1.18] tracking-tight;
+  }
+
+  /* Eyebrow — small Latin/Arabic label above headings */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.28em] text-brand-red;
+  }
+
+  /* Pill / badge — pass a border/text color in the consuming component */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[0.7rem] font-medium tracking-wide;
+  }
+
+  /* Primary button — strong red brand accent */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold
+           transition-all duration-300 ease-premium will-change-transform focus-visible:outline-none;
+  }
+  .btn-primary {
+    @apply btn bg-brand-red text-sand-50 shadow-glow-red hover:bg-brand-red-light hover:-translate-y-0.5 active:translate-y-0;
+  }
+  .btn-dark {
+    @apply btn bg-charcoal-900 text-sand-50 hover:bg-charcoal-800 hover:-translate-y-0.5 active:translate-y-0;
+  }
+  .btn-outline {
+    @apply btn border border-charcoal-900/20 bg-transparent text-charcoal-900 hover:border-brand-red hover:text-brand-red hover:-translate-y-0.5;
+  }
+  .btn-ghost-light {
+    @apply btn border border-sand-50/25 bg-sand-50/5 text-sand-50 backdrop-blur-sm hover:border-sand-50/60 hover:bg-sand-50/10 hover:-translate-y-0.5;
+  }
+
+  /* Decorative thin Najdi divider band */
+  .najdi-divider {
+    height: 14px;
+    background-image: var(--najdi-band);
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+}
+
+/* ========================================================================== */
+/*  Utilities                                                                 */
+/* ========================================================================== */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Warm gold gradient text for accents */
+  .text-gold-gradient {
+    @apply bg-gradient-to-l from-brand-gold via-brand-gold-light to-brand-gold bg-clip-text text-transparent;
+  }
+
+  /* fades the bottom of an element (for cinematic image cards) */
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+
+  /* hairline ring used on dark cards */
+  .ring-warm {
+    @apply ring-1 ring-inset ring-sand-50/10;
+  }
+
+  .bg-grain {
+    background-image: theme('backgroundImage.sand-grain');
+    background-size: 22px 22px;
+  }
+}
