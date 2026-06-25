@@ -102,10 +102,15 @@ export function HeroSection() {
 
         <div className="container-wahj flex flex-col items-center gap-7 py-24 text-center">
           <Reveal>
-            <LogoMark
-              glow
-              className="h-16 w-16 animate-glow drop-shadow-[0_0_40px_rgba(201,162,75,0.4)]"
-            />
+            <div className="flex flex-col items-center gap-2">
+              <LogoMark
+                glow
+                className="h-14 w-14 animate-glow drop-shadow-[0_0_40px_rgba(201,162,75,0.4)]"
+              />
+              <span className="font-display text-3xl font-bold tracking-tight text-sand-50 sm:text-4xl">
+                وهج
+              </span>
+            </div>
           </Reveal>
 
           <Reveal delay={80}>
