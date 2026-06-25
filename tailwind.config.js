@@ -80,6 +80,14 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(18px) scale(0.96)' },
           '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
         },
+        rise: {
+          '0%': { transform: 'translateY(105%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+        'load-bar': {
+          '0%': { transform: 'scaleX(0)' },
+          '100%': { transform: 'scaleX(1)' },
+        },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-16px)' },

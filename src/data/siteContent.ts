@@ -91,6 +91,17 @@ export const hero = {
     'وكالة إبداعية متخصصة في صناعة المحتوى، إدارة الحسابات، تغطية الفعاليات، وإنتاج الفيديوهات التي تترك أثرًا.',
   primaryCta: { label: 'شاهد أعمالنا', href: '#works' },
   secondaryCta: { label: 'تواصل معنا', href: '#contact' },
+  // scrolling keyword ticker at the bottom of the hero
+  keywords: [
+    'صناعة المحتوى',
+    'تغطية الفعاليات',
+    'إنتاج الفيديو',
+    'الريلز والمحتوى القصير',
+    'المقابلات والتوثيق',
+    'الحملات الإعلانية',
+    'إدارة الحسابات',
+    'الإخراج الإبداعي',
+  ],
   floatingCards: [
     { icon: 'pen', titleAr: 'صناعة المحتوى', titleEn: 'Content Creation' },
     { icon: 'camera', titleAr: 'تغطية الفعاليات', titleEn: 'Event Coverage' },

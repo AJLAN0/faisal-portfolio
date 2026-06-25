@@ -1,3 +1,4 @@
+import { IntroLoader } from '@/components/ui/IntroLoader'
 import { Header } from '@/components/Header'
 import { HeroSection } from '@/components/HeroSection'
 import { AboutSection } from '@/components/AboutSection'
@@ -12,6 +13,8 @@ import { Footer } from '@/components/Footer'
 export default function App() {
   return (
     <>
+      <IntroLoader />
+
       {/* Accessibility: skip straight to content */}
       <a
         href="#home"
