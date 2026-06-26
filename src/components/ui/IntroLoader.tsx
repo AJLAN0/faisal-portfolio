@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { LogoMark } from '@/components/ui/Logo'
-import { NajdiPattern } from '@/components/ui/NajdiPattern'
-import { brand } from '@/data/siteContent'
 import { cn } from '@/lib/cn'
 
 /**
- * Cinematic title sequence. The brand name "وهج" rises in very large, holds,
- * then smoothly shrinks + lifts + dissolves into the hero's brand emblem while
- * the dark curtain fades away — a movie-style hand-off into the page.
- * Skipped entirely when the user prefers reduced motion.
+ * Intro: the word "WAHJ" sits as a hairline outline on a solid dark screen,
+ * a red "liquid" rises to fill it, then the whole curtain slides up to reveal
+ * the hero. Skipped entirely when the user prefers reduced motion.
  */
 export function IntroLoader() {
-  const [phase, setPhase] = useState<'in' | 'out' | 'done'>('in')
+  const [phase, setPhase] = useState<'fill' | 'out' | 'done'>('fill')
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -22,11 +18,11 @@ export function IntroLoader() {
     }
 
     document.body.style.overflow = 'hidden'
-    const toOut = window.setTimeout(() => setPhase('out'), 1650)
+    const toOut = window.setTimeout(() => setPhase('out'), 2050) // after the fill completes
     const toDone = window.setTimeout(() => {
       setPhase('done')
       document.body.style.overflow = ''
-    }, 2800)
+    }, 2850)
 
     return () => {
       clearTimeout(toOut)
@@ -37,57 +33,21 @@ export function IntroLoader() {
 
   if (phase === 'done') return null
 
-  const out = phase === 'out'
-  const nameAr = brand.nameAr.split(' ')[0] // "وهج" — matches the hero emblem
-
   return createPortal(
     <div
       aria-hidden="true"
-      className={cn('fixed inset-0 z-[100] overflow-hidden', out && 'pointer-events-none')}
+      className={cn(
+        'fixed inset-0 z-[100] grid place-items-center overflow-hidden bg-charcoal-950',
+        'transition-transform duration-[750ms] ease-[cubic-bezier(0.76,0,0.24,1)] will-change-transform',
+        phase === 'out' ? '-translate-y-full' : 'translate-y-0',
+      )}
     >
-      {/* Dark curtain + warm ambience — fades to reveal the hero underneath */}
-      <div
-        className={cn(
-          'absolute inset-0 bg-charcoal-950 transition-opacity duration-[1000ms] ease-premium',
-          out ? 'opacity-0' : 'opacity-100',
-        )}
-      />
-      <div
-        className={cn(
-          'absolute inset-0 transition-opacity duration-700 ease-premium',
-          out ? 'opacity-0' : 'opacity-100',
-        )}
-      >
-        <div className="absolute inset-0 bg-night-glow" />
-        <NajdiPattern className="absolute inset-0 h-full w-full text-brand-gold/[0.05]" />
-        <div className="absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-gold/15 blur-3xl" />
-      </div>
+      {/* faint warm aura behind the word — keeps the BG essentially solid */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-[40rem] max-w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-red/10 blur-3xl" />
 
-      {/* Morphing brand title — shrinks, lifts and fades into the hero */}
-      <div className="relative grid h-full place-items-center px-6">
-        <div
-          className={cn(
-            'flex flex-col items-center gap-4 will-change-transform',
-            'transition-all duration-[1150ms] ease-[cubic-bezier(0.7,0,0.2,1)]',
-            out
-              ? '-translate-y-[15vh] scale-[0.3] opacity-0'
-              : 'translate-y-0 scale-100 opacity-100',
-          )}
-        >
-          <LogoMark
-            glow
-            className="h-20 w-20 animate-glow drop-shadow-[0_0_60px_rgba(201,162,75,0.5)] sm:h-24 sm:w-24"
-          />
-
-          <div className="overflow-hidden pb-2">
-            <span className="block animate-rise font-display text-[clamp(4.5rem,26vw,15rem)] font-bold leading-none tracking-tight text-sand-50">
-              {nameAr}
-            </span>
-          </div>
-
-          <span className="mt-3 h-px w-48 origin-center animate-load-bar bg-gradient-to-l from-transparent via-brand-gold to-transparent" />
-        </div>
-      </div>
+      <span className="liquid-text select-none font-sans text-[clamp(4rem,22vw,13rem)] font-black leading-none tracking-tight">
+        WAHJ
+      </span>
     </div>,
     document.body,
   )

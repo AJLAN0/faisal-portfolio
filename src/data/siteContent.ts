@@ -89,6 +89,10 @@ export const hero = {
   headline: 'نصنع حضورك الرقمي بأسلوب سعودي فاخر',
   subheadline:
     'وكالة إبداعية متخصصة في صناعة المحتوى، إدارة الحسابات، تغطية الفعاليات، وإنتاج الفيديوهات التي تترك أثرًا.',
+  // brand lockup (SINE-style): big English wordmark + red sub-word
+  wordmark: 'WAHJ',
+  wordmarkSub: 'PRODUCTION',
+  descriptor: 'استراتيجية / إبداعية',
   primaryCta: { label: 'شاهد أعمالنا', href: '#works' },
   secondaryCta: { label: 'تواصل معنا', href: '#contact' },
   // scrolling keyword ticker at the bottom of the hero
