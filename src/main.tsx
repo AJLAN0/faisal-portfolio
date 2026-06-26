@@ -1,5 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+// Self-hosted display font: Reem Kufi (geometric Najdi Kufi) — Arabic subset
+import '@fontsource/reem-kufi/arabic-400.css'
+import '@fontsource/reem-kufi/arabic-500.css'
+import '@fontsource/reem-kufi/arabic-600.css'
+import '@fontsource/reem-kufi/arabic-700.css'
 import App from './App.tsx'
 import './index.css'
 

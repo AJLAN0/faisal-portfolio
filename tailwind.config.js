@@ -52,7 +52,8 @@ export default {
       },
       fontFamily: {
         sans: ['Tajawal', 'system-ui', 'sans-serif'],
-        display: ['"El Messiri"', 'Tajawal', 'serif'],
+        // Geometric Najdi Kufi for headings & brand
+        display: ['"Reem Kufi"', 'Tajawal', 'sans-serif'],
       },
       boxShadow: {
         card: '0 18px 40px -24px rgba(19, 16, 13, 0.45)',

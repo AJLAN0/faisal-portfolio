@@ -18,7 +18,7 @@ high‑end portfolio, not a generic template.
 | Build tool | **Vite 5** |
 | Styling | **Tailwind CSS 3** (custom brand theme) |
 | Icons | **lucide-react** + custom inline SVG (socials, logo) |
-| Fonts | **Tajawal** (body) + **El Messiri** (display) via Google Fonts |
+| Fonts | **Tajawal** (body, Google Fonts) + **Reem Kufi** (display — geometric Najdi Kufi, self-hosted via `@fontsource`) |
 | Animations | IntersectionObserver scroll‑reveal + CSS (no animation library) |
 
 No backend. Fully static — deploy the `dist/` folder anywhere (Vercel, Netlify,
