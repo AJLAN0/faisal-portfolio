@@ -182,21 +182,16 @@ export function ProcessSection() {
                 className="absolute w-[13.5rem] -translate-x-1/2 -translate-y-1/2 sm:w-64 lg:w-72"
                 style={{ left: `${LEFT_PCT[i]}%`, top: `${TOP_PCT[i]}%` }}
               >
-                <div
-                  className={cn(
-                    'rounded-3xl border bg-white p-5 text-center shadow-card transition-all duration-500 ease-premium sm:p-6',
-                    active ? 'border-brand-red/25 shadow-card-hover' : 'border-charcoal-900/[0.07]',
-                  )}
-                >
+                <div className="flex flex-col items-center text-center">
                   <div
                     ref={(el) => {
                       nodeRefs.current[i] = el
                     }}
                     className={cn(
-                      'mx-auto mb-3 grid h-14 w-14 place-items-center rounded-2xl transition-all duration-500 ease-premium',
+                      'mb-3 grid h-16 w-16 place-items-center rounded-2xl ring-4 transition-all duration-500 ease-premium',
                       active
-                        ? 'scale-105 bg-brand-red text-sand-50 shadow-glow-red ring-4 ring-brand-red/15'
-                        : 'bg-charcoal-900 text-brand-gold-light',
+                        ? 'scale-105 bg-brand-red text-sand-50 shadow-glow-red ring-brand-red/15'
+                        : 'bg-charcoal-900 text-brand-gold-light ring-sand-100',
                     )}
                   >
                     <Icon name={step.icon} className="h-7 w-7" />
