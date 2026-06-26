@@ -155,13 +155,13 @@
    from the bottom, with a warm gold meniscus at the surface. */
 .liquid-text {
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(245, 241, 234, 0.22);
+  -webkit-text-stroke: 1.5px rgba(245, 241, 234, 0.28);
+  /* solid white "liquid" rising into the letters */
   background-image: linear-gradient(
     to top,
-    #8e1a1f 0%,
-    #c1272d 44%,
-    #e6c988 49.4%,
-    transparent 50.6%
+    #ffffff 0%,
+    #ffffff 49.2%,
+    transparent 50.8%
   );
   background-repeat: no-repeat;
   background-size: 100% 200%;
