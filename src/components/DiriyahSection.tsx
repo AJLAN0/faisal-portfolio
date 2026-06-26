@@ -1,5 +1,3 @@
-import { Sparkles } from 'lucide-react'
-import { Badge } from '@/components/ui/Badge'
 import { PlayButton } from '@/components/ui/PlayButton'
 import { Reveal } from '@/components/ui/Reveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
