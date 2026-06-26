@@ -21,12 +21,6 @@ export function HeroSection() {
       <div className="container-wahj relative z-10 grid items-center gap-12 py-28 lg:grid-cols-2 lg:gap-8 lg:py-0 lg:min-h-[100svh]">
         {/* Tagline (start / right in RTL) */}
         <div className="order-2 flex flex-col items-center gap-6 text-center lg:order-1 lg:items-start lg:text-start">
-          <Reveal>
-            <span className="inline-flex items-center gap-2.5 rounded-full border border-sand-50/15 bg-charcoal-900/50 px-4 py-1.5 text-xs font-medium tracking-wide text-sand-100 backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 animate-glow rounded-full bg-brand-red" aria-hidden="true" />
-              {hero.eyebrow}
-            </span>
-          </Reveal>
 
           <Reveal delay={90}>
             <h1 className="heading-display text-balance text-4xl leading-[1.15] sm:text-5xl lg:text-6xl">

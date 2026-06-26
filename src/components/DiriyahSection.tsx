@@ -21,14 +21,6 @@ export function DiriyahSection() {
 
       <div className="container-wahj relative">
         <div className="flex flex-col items-start gap-5">
-          <Reveal>
-            <Badge
-              className="border-brand-gold/30 bg-brand-gold/10 text-brand-gold-light"
-              icon={<Sparkles className="h-3.5 w-3.5" />}
-            >
-              {diriyah.label}
-            </Badge>
-          </Reveal>
           <SectionHeading
             align="start"
             tone="dark"
